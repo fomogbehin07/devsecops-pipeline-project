@@ -4,7 +4,7 @@ Overview
 
 This project demonstrates a full DevSecOps implementation securing an application across the software development lifecycle.
 
-It integrates automated security controls into CI/CD pipelines, containerization, and runtime environments.
+It integrates automated security controls into CI/CD pipelines, containerization, terraform, and runtime environments.
 
 
 Architecture
@@ -48,6 +48,10 @@ Security Controls Implemented
 7. Kubernetes Security
 * Implemented RBAC and network policies
 * Enforced least privilege access
+
+8. Terraform Security
+* Secure terraform code using Checkov before deployment.
+* Ensure misconfiguration of terraform code is corrected before deployment.
 
 CI/CD Pipeline Flow
 1. Code Commit Trigger
