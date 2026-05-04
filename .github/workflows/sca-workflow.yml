@@ -1,3 +1,8 @@
+
+name: DevSecOps Pipeline
+
+on: [push]
+
 jobs:
   security-scan:
     runs-on: ubuntu-latest
