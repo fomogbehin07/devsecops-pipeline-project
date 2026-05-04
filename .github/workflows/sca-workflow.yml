@@ -1,0 +1,17 @@
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: You must pull your code into the runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Run the scanner on your filesystem (fs)
+      - name: Run Trivy SCA Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'table' # Shows the results in your GitHub log
+          exit-code: '1'  # This will FAIL the build if vulnerabilities are found
+          severity: 'CRITICAL,HIGH'
