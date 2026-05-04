@@ -13,7 +13,7 @@ jobs:
 
       # Step 2: Run the scanner on your filesystem (fs)
       - name: Run Trivy SCA Scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@main
         with:
           scan-type: 'fs'
           scan-ref: '.'
