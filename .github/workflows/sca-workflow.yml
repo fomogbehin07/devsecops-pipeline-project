@@ -23,3 +23,12 @@ jobs:
           format: 'table' # Shows the results in your GitHub log
           exit-code: '1'  # This will FAIL the build if vulnerabilities are found
           severity: 'CRITICAL,HIGH'
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          framework: all # Scans IaC, SCA, and Secrets
+          soft_fail: false # Fails the build if issues are found
+          output_format: cli
+          # api-key: ${{ secrets.BC_API_KEY }} # Required for full SCA results
