@@ -1,0 +1,34 @@
+
+name: DevSecOps Pipeline
+
+on: [push]
+
+permissions:
+  contents: read
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: You must pull your code into the runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Run the scanner on your filesystem (fs)
+      - name: Run Trivy SCA Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'table' # Shows the results in your GitHub log
+          exit-code: '1'  # This will FAIL the build if vulnerabilities are found
+          severity: 'CRITICAL,HIGH'
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          framework: all # Scans IaC, SCA, and Secrets
+          soft_fail: false # Fails the build if issues are found
+          output_format: cli
+          # api-key: ${{ secrets.BC_API_KEY }} # Required for full SCA results
